@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+    volumes:
+      - ./client:/app
+      - /app/node_modules # Exclude node_modules from host mount
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    depends_on:
+      - db
+    volumes:
+      - ./api:/usr/src/app
+      - /usr/src/app/node_modules # Exclude node_modules from host mount
+    environment:
+      # Add environment variables for database connection here
+      # For example:
+      # DATABASE_URL: postgres://user:password@db:5432/mydatabase
+
+  db:
+    image: postgres:13-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: watchlist
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:
