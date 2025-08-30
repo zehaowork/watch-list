@@ -58,9 +58,16 @@ This project is divided into the following phases:
 
 ## Getting Started
 
-To get the development environment running, you will need to have [Docker](httpss://www.docker.com/get-started) installed.
+## Prerequisites
 
-1.  **Clone the repository:**
+To run this application, you will need:
+
+-   **Git:** For cloning the repository.
+-   **Node.js and npm:** For managing project dependencies (though Docker will handle most of this).
+-   **Docker Desktop:** This is essential for running the application's services (client, API, and database) in isolated containers.
+    -   **For Windows users:** Ensure you have [WSL 2 (Windows Subsystem for Linux 2)](https://docs.microsoft.com/en-us/windows/wsl/install) installed and enabled, as Docker Desktop for Windows relies on it.
+
+1.  **Clone the repository:****
     ```bash
     git clone <repository-url>
     cd watch-list
