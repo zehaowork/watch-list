@@ -5,8 +5,7 @@ This project is a full-stack web application where users can search for media (m
 ## Tech Stack
 
 - **Frontend:** [React](https://reactjs.org/), [TailwindCSS](https://tailwindcss.com/), [TypeScript](https://www.typescriptlang.org/)
-- **Backend:** [NestJS](https://nestjs.com/), [PostgreSQL](https://www.postgresql.org/)
-- **ORM:** [TypeORM](https://typeorm.io/)
+- **Backend:** [NestJS](https://nestjs.com/), [PostgreSQL](https://www.postgresql.org/), [TypeORM](https://typeorm.io/)
 - **Deployment:** [Docker](https://www.docker.com/)
 
 ## Project Structure
@@ -22,7 +21,7 @@ This project is divided into the following phases:
 
 ### Phase 1: Foundation & Setup
 - [x] **Project Scaffolding:** Set up a monorepo with `/client` and `/api` directories. Initialize Git.
-- [ ] **Dockerization:** Create `docker-compose.yml` and `Dockerfile`s for client, api, and db.
+- [x] **Dockerization:** Create `docker-compose.yml` and `Dockerfile`s for client, api, and db.
 - [x] **Initialize Apps:** Use CLIs to create boilerplate for React and NestJS.
 - [ ] **Database Integration:** Integrate TypeORM into the NestJS project and define initial schema.
 
@@ -58,30 +57,53 @@ This project is divided into the following phases:
 
 ## Getting Started
 
-## Prerequisites
+This section guides you through setting up and running the Watchlist application locally using Docker.
+
+### Prerequisites
 
 To run this application, you will need:
 
 -   **Git:** For cloning the repository.
--   **Node.js and npm:** For managing project dependencies (though Docker will handle most of this).
+-   **Node.js and npm:** (Optional, but recommended for local development outside Docker) For managing project dependencies and running scripts.
 -   **Docker Desktop:** This is essential for running the application's services (client, API, and database) in isolated containers.
     -   **For Windows users:** Ensure you have [WSL 2 (Windows Subsystem for Linux 2)](https://docs.microsoft.com/en-us/windows/wsl/install) installed and enabled, as Docker Desktop for Windows relies on it.
 
-1.  **Clone the repository:****
+### Setup Steps
+
+1.  **Clone the repository:**
     ```bash
     git clone <repository-url>
     cd watch-list
     ```
+    Replace `<repository-url>` with the actual URL of your Git repository.
 
-2.  **Run the application:**
+2.  **Build and Run the application with Docker Compose:**
     ```bash
     docker-compose up --build
     ```
+    This command will:
+    -   Build the Docker images for the `client` and `api` services based on their respective `Dockerfile`s.
+    -   Create and start the `client`, `api`, and `db` (PostgreSQL) containers.
+    -   Link the services as defined in `docker-compose.yml`.
 
-This will start three services:
-- `client`: The React frontend, accessible at `http://localhost:3000`
-- `api`: The NestJS backend, accessible at `http://localhost:3001`
-- `db`: The PostgreSQL database.
+    This will start three services:
+    - `client`: The React frontend, accessible at `http://localhost:3000`
+    - `api`: The NestJS backend, accessible at `http://localhost:3001`
+    - `db`: The PostgreSQL database.
+
+3.  **Access the Application:**
+    -   Open your web browser and navigate to `http://localhost:3000` to access the React frontend.
+    -   The NestJS API will be running at `http://localhost:3001`. You can test it by navigating to `http://localhost:3001` (which should return "Hello World!" for the default setup).
+
+4.  **Stop the Application:**
+    To stop all running Docker containers and remove the networks created by Docker Compose, run:
+    ```bash
+    docker-compose down
+    ```
+    If you also want to remove the volumes (e.g., database data), add the `--volumes` flag:
+    ```bash
+    docker-compose down --volumes
+    ```
 
 ## Roles
 
