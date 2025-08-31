@@ -25,9 +25,10 @@ services:
       - ./api:/usr/src/app
       - /usr/src/app/node_modules # Exclude node_modules from host mount
     environment:
-      # Add environment variables for database connection here
-      # For example:
-      # DATABASE_URL: postgres://user:password@db:5432/mydatabase
+      DATABASE_URL: postgres://user:password@db:5432/watchlist
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: watchlist
 
   db:
     image: postgres:13-alpine
